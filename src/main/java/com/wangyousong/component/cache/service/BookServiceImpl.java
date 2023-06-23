@@ -6,6 +6,7 @@ import com.wangyousong.component.cache.entity.Book;
 import com.wangyousong.component.cache.exception.ResourceNotFoundException;
 import com.wangyousong.component.cache.repo.BookRepository;
 import jakarta.annotation.Resource;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
@@ -23,12 +24,14 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
+    @CacheEvict(value = "books", allEntries = true)
     public String createABook(CreateBookRequest request) {
         Book saved = repository.save(request.toEntity());
         return saved.getId();
     }
 
     @Override
+    @CacheEvict(value = "books")
     public void updateBook(String id, CreateBookRequest request) {
         Optional<Book> optional = repository.findById(id);
         if(optional.isEmpty()){
