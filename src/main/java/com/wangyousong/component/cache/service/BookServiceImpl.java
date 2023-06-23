@@ -26,7 +26,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-//    @CacheEvict(value = "books", allEntries = true)
+    @CacheEvict(value = "books", allEntries = true)
     public String createABook(CreateBookRequest request) {
         Book saved = repository.save(request.toEntity());
         return saved.getId();
