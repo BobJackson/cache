@@ -21,5 +21,6 @@ public class BookDto implements Serializable {
         this.subtitle = entity.getSubtitle();
         this.coverUrl = entity.getCoverUrl();
         this.createdAt = entity.getCreatedAt();
+        this.description = entity.getDescription();
     }
 }
