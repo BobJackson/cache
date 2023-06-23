@@ -12,7 +12,6 @@ public class BookDto implements Serializable {
     private String title;
     private String subtitle;
     private String coverUrl;
-
     private Instant createdAt;
 
     public BookDto(Book entity) {
