@@ -3,6 +3,7 @@ package com.wangyousong.component.cache.service;
 import com.wangyousong.component.cache.controller.cmd.CreateBookRequest;
 import com.wangyousong.component.cache.controller.resp.BookDto;
 import com.wangyousong.component.cache.entity.Book;
+import com.wangyousong.component.cache.exception.ResourceNotFoundException;
 import com.wangyousong.component.cache.repo.BookRepository;
 import jakarta.annotation.Resource;
 import org.springframework.cache.annotation.Cacheable;
@@ -30,6 +31,9 @@ public class BookServiceImpl implements BookService {
     @Override
     public void updateBook(String id, CreateBookRequest request) {
         Optional<Book> optional = repository.findById(id);
+        if(optional.isEmpty()){
+            throw new ResourceNotFoundException("can't find book with id " + id);
+        }
         optional.ifPresent(book -> {
             book.setTitle(request.getTitle());
             book.setSubtitle(request.getSubtitle());
