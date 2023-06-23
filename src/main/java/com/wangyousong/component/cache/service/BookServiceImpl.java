@@ -8,6 +8,7 @@ import com.wangyousong.component.cache.repo.BookRepository;
 import jakarta.annotation.Resource;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,7 +21,8 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public List<Book> listAllBooks() {
-        return repository.findAll();
+        Sort sortByCreatedAtDesc = Sort.by(Sort.Direction.DESC, "createdAt");
+        return repository.findAll(sortByCreatedAtDesc);
     }
 
     @Override
@@ -31,10 +33,10 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    @CacheEvict(value = "books")
+    @CacheEvict(value = "books", allEntries = true)
     public void updateBook(String id, CreateBookRequest request) {
         Optional<Book> optional = repository.findById(id);
-        if(optional.isEmpty()){
+        if (optional.isEmpty()) {
             throw new ResourceNotFoundException("can't find book with id " + id);
         }
         optional.ifPresent(book -> {
