@@ -32,5 +32,7 @@ public class Book {
     private String coverUrl;
 
     private Instant createdAt;
+    @Column(name = "description", columnDefinition = "TEXT")
+    private String description;
 
 }

@@ -13,6 +13,7 @@ public class BookDto implements Serializable {
     private String subtitle;
     private String coverUrl;
     private Instant createdAt;
+    private String description;
 
     public BookDto(Book entity) {
         this.id = entity.getId();

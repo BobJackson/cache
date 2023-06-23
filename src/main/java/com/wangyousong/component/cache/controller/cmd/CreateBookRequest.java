@@ -11,6 +11,7 @@ public class CreateBookRequest {
     private String subtitle;
     private String coverUrl;
     private Instant createdAt;
+    private String description;
 
     public Book toEntity() {
         Book entity = new Book();
@@ -19,6 +20,7 @@ public class CreateBookRequest {
         entity.setCoverUrl(coverUrl);
         entity.setCreatedAt(createdAt);
         entity.setCreatedAt(Instant.now());
+        entity.setDescription(description);
         return entity;
     }
 }

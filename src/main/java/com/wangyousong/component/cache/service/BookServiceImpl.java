@@ -26,7 +26,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    @CacheEvict(value = "books", allEntries = true)
+//    @CacheEvict(value = "books", allEntries = true)
     public String createABook(CreateBookRequest request) {
         Book saved = repository.save(request.toEntity());
         return saved.getId();
@@ -43,6 +43,7 @@ public class BookServiceImpl implements BookService {
             book.setTitle(request.getTitle());
             book.setSubtitle(request.getSubtitle());
             book.setCoverUrl(request.getCoverUrl());
+            book.setDescription(request.getDescription());
             repository.save(book);
         });
     }
