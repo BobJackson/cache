@@ -18,6 +18,7 @@ public class CreateBookRequest {
         entity.setSubtitle(subtitle);
         entity.setCoverUrl(coverUrl);
         entity.setCreatedAt(createdAt);
+        entity.setCreatedAt(Instant.now());
         return entity;
     }
 }
