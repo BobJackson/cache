@@ -31,4 +31,6 @@ public class Book {
     @NotEmpty(message = "coverUrl is required")
     private String coverUrl;
 
+    private Instant createdAt;
+
 }
